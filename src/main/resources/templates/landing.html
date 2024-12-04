@@ -9,9 +9,9 @@
 <body class="flex m-0 font-poppins justify-center items-center bg-custom-gray">
     <div class="flex flex-col">
     <div class="flex flex-col md:flex-row">
-        <div class="bg-custom-blue bg-opacity-5 items-center justify-center p-28 flex md:w-4/5 rounded-tr-xl rounded-br-xl"> 
+        <div class="bg-custom-blue bg-opacity-5 items-center justify-center p-24 flex md:w-4/5 rounded-tr-xl rounded-br-xl"> 
            
-            <img src="/src/main/resources/static/images/51PtFHUPjBL.jpg" class="max-w-sm">
+            <img src="/src/main/resources/static/images/gagdets.png" class="max-w-2xl">
            
         </div>
         <div class="flex flex-col items-center justify-center text-center md:text-left md:ml-6">
@@ -26,7 +26,9 @@
                     visibility, and empower users with easy-to-use tools.
                 </p>
                 <div class="flex w-full justify-center md:justify-start">
-                    <button class="bg-custom-blue w-60 p-3 text-white rounded-lg text-lg hover:bg-blue-700">Get Started</button>
+                    <a href="#ready-to-get-started">
+                    <button id="get-started" class="bg-custom-blue w-60 p-3 text-white rounded-lg text-lg hover:bg-blue-700">Get Started</button>
+                </a>
                 </div>
             </div>
         </div>
@@ -34,7 +36,7 @@
     <div class="bg-white flex flex-col md:flex-row items-center justify-around p-10">
         <div class="flex flex-col justify-center items-center w-full md:w-1/3 mb-6 md:mb-0">
             <div class="bg-custom-gray w-48 h-48 rounded-full p-6 flex flex-col items-center justify-center">
-                <img src="/src/main/resources/static/images/51PtFHUPjBL.jpg" class="w-24">
+                <img src="/src/main/resources/static/images/usersd.png" class="w-40">
             </div>
             <div class="text-center mt-4">
                 <h1 class="font-semibold text-lg">Seamless Login & Registration</h1>
@@ -45,7 +47,7 @@
         </div>
         <div class="flex flex-col justify-center items-center w-full md:w-1/3 mb-6 md:mb-0">
             <div class="bg-custom-gray w-48 h-48 rounded-full p-6 flex flex-col items-center justify-center">
-                <img src="/src/main/resources/static/images/51PtFHUPjBL.jpg" class="w-24">
+                <img src="/src/main/resources/static/images/dashboard.png" class="w-48">
             </div>
             <div class="text-center mt-4">
                 <h1 class="font-semibold text-lg">Comprehensive Admin Dashboard</h1>
@@ -56,7 +58,7 @@
         </div>
         <div class="flex flex-col justify-center items-center w-full md:w-1/3">
             <div class="bg-custom-gray w-48 h-48 rounded-full p-6 flex flex-col items-center justify-center">
-                <img src="/src/main/resources/static/images/51PtFHUPjBL.jpg" class="w-24">
+                <img src="/src/main/resources/static/images/search.png" class="w-48">
             </div>
             <div class="text-center mt-4">
                 <h1 class="font-semibold text-lg">User-Friendly Search Tools</h1>
@@ -66,7 +68,7 @@
             </div>
         </div>
     </div>
-    <div class="flex flex-col md:flex-row p-14 justify-around">
+    <div class="flex flex-col md:flex-row p-14 justify-around" id="ready-to-get-started">
         <div class="flex flex-col justify-center max-w-3xl">
             <h1 class="text-5xl font-bold">Ready to Get Started?</h1>
             <p class="max-w-md text-lg font-medium text-justify mt-6 mb-8">
@@ -87,18 +89,18 @@
             <img src="/src/main/resources/static/images/51PtFHUPjBL.jpg" class="w-12">
         </div>
     </div>
-    <footer class="bg-black text-white p-6">
-        <div class="flex flex-col md:flex-row justify-around items-start">
-            <div class="flex flex-col mb-6 md:mb-0">
+    <footer class="bg-black text-white pt-8 pb-12">
+        <div class="flex flex-col md:flex-row justify-center items-center md:justify-around md:items-start">
+            <div class="flex flex-col mb-6 md:mb-0 text-center md:text-left">
                 <h1 class="text-2xl font-bold">Contact Us:</h1>
                 <p class="text-xl md:text-base">Need help? Reach us at support@techventory.com</p>
-                <ol class="list-disc ml-6">
+                <ol class="list-disc ml-6 text-center md:text-left">
                     <a href=""><li>Facebook</li></a>
                     <a href=""><li>Twitter</li></a>
                     <a href=""><li>LinkedIn</li></a>
                 </ol>
             </div>
-            <div class="flex items-center justify-center md:justify-start">
+            <div class="flex flex-col items-center md:items-start justify-center md:justify-start">
                 <span class="text-sm text-center md:text-left">
                     <h1 class="text-2xl mb-3">Join our Newsletter!</h1>
                     <input type="text" class="w-64 h-8 rounded-lg text-black p-3" placeholder="Email Address">
@@ -107,11 +109,7 @@
             </div>
         </div>
     </footer>
-    
     </div>
-    
-   
 </div>
-
 </body>
 </html>

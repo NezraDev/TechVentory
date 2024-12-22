@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Admin Login</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link th:href="@{/main.css}" rel="stylesheet">
+  <link th:href="@{/images/logo%20solo.png}" rel="icon" type="image/x-icon">
+</head>
+<body class="flex justify-center items-center min-h-screen p-6 font-poppins bg-gray-100">
+<div class="flex flex-col items-center justify-center w-full max-w-3xl min-h-[65vh] p-8 bg-white rounded-lg shadow-lg">
+  <div class="flex flex-row items-center justify-center gap-4 mb-8">
+    <div>
+      <a href="/">
+        <img th:src="@{/images/logo.png}" class="w-48 md:w-48">
+      </a>
+    </div>
+  </div>
+  <div class="mb-3 flex items-center justify-center gap-3">
+    <h2 class="font-bold text-xl md:text-3xl text-center">Welcome</h2>
+    <img th:src="@{/images/wave hand.png}" alt="Wave Hand" class="w-8 md:w-10">
+  </div>
+  <p class="text-gray-400 text-sm md:text-md font-light mb-6 text-center">Please Login here</p>
+  <form action="#" method="post" class="flex flex-col gap-4 w-full max-w-sm">
+    <div class="relative">
+      <input type="text" value="admin" disabled id="username" name="username" class="border rounded-lg border-black p-2 w-full pt-6 text-sm focus:outline-none focus:ring-2 focus:ring-custom-blue" placeholder=" " required>
+      <label for="username" class="absolute left-2 top-2 transition-all duration-300 text-xs text-custom-blue">Username</label>
+    </div>
+    <div class="relative">
+      <input type="password" id="password" name="password" class="border rounded-lg border-black p-2 w-full pt-6 text-sm focus:outline-none focus:ring-2 focus:ring-custom-blue" placeholder=" " required>
+      <label for="password" class="absolute left-2 top-2 transition-all duration-300 text-xs text-custom-blue">Password</label>
+    </div>
+    <div class="flex items-center justify-center mt-6">
+      <button type="submit" method="POST" class="mb-4 bg-custom-blue w-full p-3 text-white font-thin rounded-lg hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300">
+        Login
+      </button>
+    </div>
+  </form>
+</div>
+</body>
+</html>

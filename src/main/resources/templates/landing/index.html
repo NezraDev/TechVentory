@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>TechVentory</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link th:href="@{/main.css}" rel="stylesheet">
+    <link th:href="@{/images/logo%20solo.png}" rel="icon" type="image/x-icon">
+</head>
+
+<body class="flex m-0 font-poppins justify-center items-center bg-custom-gray">
+<div class="flex flex-col">
+    <div class="flex flex-col md:flex-row">
+        <!-- Image Section -->
+        <div class="bg-custom-blue bg-opacity-5 flex items-center justify-center p-6 md:p-28 rounded-tr-xl rounded-br-xl">
+            <img th:src="@{/images/gagdets.png}" class="w-full sm:w-5/6 md:w-full lg:w-full xl:w-full 2xl:w-full">
+        </div>
+    <!-- Text Section -->
+        <div class="bg-custom-gray flex flex-col justify-center p-4 md:p-8 mt-0 md:mt-0">
+            <div class="flex items-center justify-center mb-4">
+                <img th:src="@{/images/logo.png}" class="w-48 md:w-72">
+            </div>
+            <h1 class="font-semibold text-3xl md:text-5xl text-center md:text-left mb-4">
+                Techventory: Simplify Gadget Inventory Management Today!
+            </h1>
+            <h2 class="font-semibold text-lg mb-4 text-center md:text-left md:text-2xl">
+                Welcome to Techventory
+            </h2>
+            <p class="text-xl text-justify mb-8">
+                A powerful and intuitive solution to manage, track, and access gadget inventory. Simplify administration, improve stock visibility, and empower users with easy-to-use tools.
+            </p>
+            <a href="#ready-to-get-started">
+                <button id="get-started" class="bg-custom-blue w-full p-3 text-white rounded-lg text-lg hover:bg-blue-700">
+                    Get Started
+                </button>
+            </a>
+        </div>
+    </div>
+
+    <div class="bg-white flex flex-col md:flex-row items-center justify-around p-10">
+        <div class="flex flex-col justify-center items-center w-full md:w-1/3 mb-6 md:mb-0">
+            <div class="bg-custom-gray w-48 h-48 rounded-full p-6 flex flex-col items-center justify-center">
+                <img th:src="@{/images/usersd.png}" class="w-40">
+            </div>
+            <div class="text-center mt-4">
+                <h1 class="font-semibold text-lg">Seamless Login & Registration</h1>
+                <p class="max-w-xs md:max-w-md text-lg mt-2">
+                    Admins and users can easily login or signup to access followed features
+                </p>
+            </div>
+        </div>
+        <div class="flex flex-col justify-center items-center w-full md:w-1/3 mb-6 md:mb-0">
+            <div class="bg-custom-gray w-48 h-48 rounded-full p-6 flex flex-col items-center justify-center">
+                <img th:src="@{/images/dashboard.png}" class="w-48">
+            </div>
+            <div class="text-center mt-4">
+                <h1 class="font-semibold text-lg">Comprehensive Admin Dashboard</h1>
+                <p class="max-w-xs md:max-w-md text-lg mt-2">
+                    View total gadget stocks, manage items with full CRUD functionality, and track inventory efficiently.
+                </p>
+            </div>
+        </div>
+        <div class="flex flex-col justify-center items-center w-full md:w-1/3">
+            <div class="bg-custom-gray w-48 h-48 rounded-full p-6 flex flex-col items-center justify-center">
+                <img th:src="@{/images/search.png}" class="w-48">
+            </div>
+            <div class="text-center mt-4">
+                <h1 class="font-semibold text-lg">User-Friendly Search Tools</h1>
+                <p class="max-w-xs md:max-w-md text-lg mt-2">
+                    Empowering users to quickly find what they need with a powerful search bar and detailed gadget listings.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="flex flex-col md:flex-row p-14 justify-around" id="ready-to-get-started">
+        <div class="flex flex-col justify-center max-w-3xl">
+            <h1 class="text-5xl font-bold text-center md:text-left">Ready to Get Started?</h1>
+            <p class="max-w-md text-lg font-medium text-justify mt-6 mb-8">
+                Take control of your gadget inventory today
+                Login to access your dashboard or register to
+                create a new account and start managing your
+                gadgets effortlessly
+            </p>
+            <div class="flex w-full justify-center md:justify-start">
+                <div class="flex flex-wrap gap-6 mb-6 justify-center md:justify-start">
+                    <a href="/authentication/admin">
+                    <button class="bg-custom-blue w-60 p-3 text-white rounded-lg text-lg hover:bg-blue-700">Continue as Admin</button>
+                    </a>
+                    <a href="/authentication/login">
+                        <button class="bg-custom-blue w-60 p-3 text-white rounded-lg text-lg hover:bg-blue-700">Login as User</button>
+                    </a>
+                    <a href="/authentication/register">
+                    <button class="bg-black w-60 p-3 text-white rounded-lg text-lg hover:bg-slate-600">Create an Account</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center mt-6 md:mt-0">
+            <img th:src="@{/images/logo solo.png}" class="w-64">
+        </div>
+    </div>
+    <footer class="bg-black text-white pt-8 pb-12">
+        <div class="flex flex-col md:flex-row justify-center items-center md:justify-around md:items-start">
+            <div class="flex flex-col mb-6 md:mb-0 text-center md:text-left">
+                <h1 class="text-2xl font-bold">Contact Us:</h1>
+                <p class="text-xl md:text-base">Need help? Reach us at support@techventory.com</p>
+                <ol class="list-disc ml-6 text-center md:text-left">
+                    <a href=""><li>Facebook</li></a>
+                    <a href=""><li>Twitter</li></a>
+                    <a href=""><li>LinkedIn</li></a>
+                </ol>
+            </div>
+            <div class="flex flex-col items-center md:items-start justify-center md:justify-start">
+                    <span class="text-sm text-center md:text-left">
+                        <h1 class="text-2xl mb-3">Join our Newsletter!</h1>
+                        <input type="text" class="w-64 h-8 rounded-lg text-black p-3" placeholder="Email Address">
+                        <p class="mt-4">Copyrights @ 2024 Techventory</p>
+                    </span>
+            </div>
+        </div>
+    </footer>
+</div>
+</body>
+</html>

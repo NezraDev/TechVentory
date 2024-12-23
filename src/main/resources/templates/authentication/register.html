@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link th:href="@{/main.css}" rel="stylesheet">
+    <link th:href="@{/css/main.css}" rel="stylesheet">
     <link th:href="@{/images/logo%20solo.png}" rel="icon" type="image/x-icon">
 </head>
 <body class="flex justify-center items-center min-h-screen p-6 font-poppins bg-gray-100">
-<div class="flex flex-col items-center justify-center w-full max-w-3xl min-h-[65vh] p-8 bg-white rounded-lg shadow-lg">
+<div class="flex flex-col items-center justify-center w-full max-w-3xl min-h-[65vh] p-8 bg-white rounded-lg shadow-lg" id="content">
     <div class="flex flex-row items-center justify-center gap-4 mb-8">
         <div>
             <a href="/">
@@ -22,7 +22,7 @@
         <img th:src="@{/images/wave hand.png}" alt="Wave Hand" class="w-8 md:w-10">
     </div>
     <p class="text-gray-400 text-sm md:text-md font-light mb-6 text-center">Please Register here</p>
-    <form action="/authentication/register" method="POST" class="flex flex-col gap-4 w-full max-w-sm">
+    <form id="registerForm" class="flex flex-col gap-4 w-full max-w-sm">
         <input type="hidden" name="_csrf" value="${_csrf.token}"/> <!-- CSRF Token -->
         <div class="relative">
             <input type="text" id="username" name="username" class="border rounded-lg border-black p-2 w-full pt-6 text-sm focus:outline-none focus:ring-2 focus:ring-custom-blue" placeholder=" " required>
@@ -32,8 +32,11 @@
             <input type="password" id="password" name="password" class="border rounded-lg border-black p-2 w-full pt-6 text-sm focus:outline-none focus:ring-2 focus:ring-custom-blue" placeholder=" " required>
             <label for="password" class="absolute left-2 top-2 transition-all duration-300 text-xs text-custom-blue">Password</label>
         </div>
+        <div>
+            <p>{error}</p>
+        </div>
         <div class="flex items-center justify-center mt-6">
-            <button type="submit" class="mb-4 bg-custom-blue w-full p-3 text-white font-thin rounded-lg hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300">
+            <button type="submit" id="submit" class="mb-4 bg-custom-blue w-full p-3 text-white font-thin rounded-lg hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300">
                 Register
             </button>
         </div>
@@ -42,5 +45,21 @@
         <span class="ml-3 text-gray-400 text-sm underline md:text-center">Already have an account?</span>
     </a>
 </div>
+
+<div id="successModal" class="absolute top-0 left-0 inset-0 bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white p-8 rounded-lg shadow-lg text-center max-w-xs w-96 animate-fadeInUp">
+        <div class="flex flex-col items-center justify-center">
+            <img th:src="@{/images/popper.png}" class="w-11">
+            <h2 class="text-2xl font-bold">Account Successfully Created!</h2>
+            <p class="mt-4 font-extralight text-md mb-6">Welcome to TechVentory!</p>
+            <button id="closeModal" class="mb-4 bg-custom-blue w-full p-3 text-white font-thin rounded-lg hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-300">Continue</button>
+        </div>
+    </div>
+</div>
+
+
 </body>
 </html>
+
+<script th:src="@{/js/main.js}"></script>
+

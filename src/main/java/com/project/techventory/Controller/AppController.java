@@ -1,4 +1,4 @@
-package com.project.Controller;
+package com.project.techventory.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @org.springframework.stereotype.Controller

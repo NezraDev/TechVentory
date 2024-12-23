@@ -1,4 +1,4 @@
-package com.project;
+package com.project.techventory;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

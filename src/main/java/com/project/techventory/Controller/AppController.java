@@ -25,6 +25,10 @@ public class AppController {
     public String admin() {
         return "authentication/admin";
     }
+    @GetMapping("user/dashboard")
+    public String user(){
+        return "user/dashboard";
+    }
 
 
 }

@@ -13,6 +13,8 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.stereotype.Service;
 
@@ -33,8 +35,16 @@ public class SecurityConfig {
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(appUserService);
+        provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
+
+
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
+
     @Bean
     public SecurityFilterChain securityFilterChain (HttpSecurity httpSecurity) throws Exception{
         return httpSecurity
@@ -42,11 +52,20 @@ public class SecurityConfig {
                 .formLogin(httpForm -> {
                     httpForm
                             .loginPage("/authentication/login").permitAll();
+                    httpForm
+                            .defaultSuccessUrl("/user/dashboard");
                 })
 
                 .authorizeHttpRequests(register->{
                     register.requestMatchers("/authentication/admin", "/authentication/register", "/", "/css/**", "/js/**" ,"/images/**").permitAll() ;
                     register.anyRequest().authenticated();
+                })
+                .logout(logout->{
+                    logout.logoutUrl("/logout");
+                    logout.logoutSuccessUrl("/authentication/login");
+                    logout.invalidateHttpSession(true);
+                    logout.clearAuthentication(true);
+                    logout.permitAll();
                 })
                 .build();
     }

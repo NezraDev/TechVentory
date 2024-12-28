@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Admin Dashboard</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link th:href="@{/css/main.css}" rel="stylesheet">
+        <link th:href="@{/images/logo%20solo.png}" rel="icon" type="image/x-icon">
+    </head>
+<body class="font-poppins">
+    <div class="flex flex-row">
+        <div class="flex flex-col bg-custom-blue bg-opacity-5 w-80 h-screen rounded-2xl m-4 gap-6 p-4">
+            <div class="flex flex-row gap-4">
+                <div class="h-12 w-12 bg-custom-gray rounded-full"></div>
+                <h1 class="text-xl flex items-center justify-center font-extrabold">TechVentory</h1>
+            </div>
+            <div class= "flex flex-row p-2 gap-3">
+                <img th:src="@{/images/dashb.png}" alt="items" class="w-8 h-8">
+                <p class="text-xl font-extralight justify-center flex items-center">Dashboard</p>
+            </div>
+            <div class="flex flex-row p-2 gap-3">
+                <img th:src="@{/images/items.png}" alt="items" class="w-8 h-8">
+                <p class="text-xl font-extralight">Items</p>
+            </div>
+        </div>
+        <div class="flex flex-col w-full h-screen m-4 gap-4 p-2 bg-white">
+            <div class="flex flex-row bg-white rounded-md p- justify-between">
+                <div class="flex flex-col">
+                    <h1 class="font-semibold text-xl">All Items</h1>
+                    <p class="font-thin text-md">Items Detail Information</p>
+                </div>
+                <div class="flex flex-row gap-4">
+                    <div class="flex items-center border-2 border-gray-300 p-2 rounded-md w-96 gap-2">
+                        <img th:src="@{/images/searchplain.png}" alt="Search Icon" class="w-8 h-8">
+                        <input 
+                          type="text" 
+                          placeholder="Search" 
+                          class="outline-none w-full text-gray-700 "
+                        >
+                      </div>
+                      
+                    <div class="flex justify-center items-center gap-4">
+                        <img th:src="@{/images/notif.png}" alt="Notification" class="w-8 h-8">
+                    </div>
+                    <div class="bg-white w-32 flex flex-row gap-2">
+                        <img th:src="@{/images/adminprof.png}" alt="Admin Profile" class="w-12 h-12">
+                        <div class="bg-white w-32 flex flex-col justify-center items-start">
+                        <h1 class="text-md font-bold">Admin</h1>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-md p-2 justify-between flex flex-col border-2 border-gray-300">
+                    <div class="flex flex-row justify-between p-3">
+                        <div class="ml-7 flex items-center border-2 border-gray-300 p-2 rounded-lg w-80 gap-2">
+                            <img th:src="@{/images/searchplain.png}" alt="Search Icon" class="w-8 h-8">
+                            <input 
+                              type="text" 
+                              placeholder="Search Item" 
+                              class="outline-none w-full text-gray-700 focus:ring-0 focus:outline-none"
+                            >
+                          </div>
+                    <div class="flex flex-row gap-4 justify-between">
+                        <div class="flex justify-center items-center">
+                            <img th:src="@{/images/cube.png}" alt="Search Icon" class="w-10 h-10">
+                        </div>
+                    <div class="bg-custom-blue w-40 p-3 text-white rounded-lg text-lg hover:bg-blue-700 flex gap-2 justify-center ">
+                        <img th:src="@{/images/add.png}" alt="Search Icon" class="w-8 h-8">
+                        <a href="/products/create" class="flex justify-center items-center">
+                        <button class="">Add Item</button>
+                        </a>
+                    </div>
+                    <div class="bg-white w-32 p-3 text-black rounded-lg text-lg flex gap-2 justify-center border-2 border-gray-300">
+                        <img th:src="@{/images/filter.png}" alt="Search Icon" class="w-8 h-8">
+                        <button class="">Filters</button>
+                    </div>
+                    </div>
+            </div>
+            <div class="bg-white rounded-lg p-4">
+                <div class="">
+                    <table class="w-full bg-gray-100 rounded-lg">
+                        <thead>
+                            <tr>
+                                <th class="border-r-2 p-3">ID</th>
+                                <th class="border-r-2 p-3">Name</th>
+                                <th class="border-r-2 p-3">Image</th>
+                                <th class="border-r-2 p-3">Price</th>
+                                <th class="border-r-2 p-3">Manufacturer Name</th>
+                                <th class="border-r-2 p-3">Category</th>
+                                <th class="border-r-2 p-3">Created At</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white">
+                            <tr th:each="product : ${products}" class="border-b-2">
+                                <td th:text="${product.id}" class="text-center p-2"></td>
+                                <td th:text="${product.productName}" class="text-center p-2"></td>
+                                <td class="text-center p-2 flex justify-center items-center">
+                                    <img th:src="@{'/images/' + ${product.productImage}}" alt="Product Image" class="w-16 h-16 ">
+                                </td>
+                                <td th:text="${product.price}" class="text-center p-2"></td>
+                                <td th:text="${product.manufacturer}" class="text-center p-2"></td>
+                                <td th:text="${product.category}" class="text-center p-2"></td>
+                                <td th:text="${product.createdAt.toString().substring(0, 10)}" class="text-center p-2"></td>
+                                <td class="text-center p-2">
+                                    <div class="flex justify-center gap-2">
+                                        <button class="bg-custom-yellow w-10 p-2 text-white rounded-md text-sm hover:bg-yellow-700 flex gap-2 justify-center items-center">
+                                            <img th:src="@{/images/edit.png}" alt="Search Icon" class="w-4 h-4">
+                                        </button>
+                                        <button class="bg-custom-blue w-10 p-2 text-white rounded-lg text-sm hover:bg-blue-700 flex gap-2 justify-center items-center">
+                                            <img th:src="@{/images/view.png}" alt="Search Icon" class="w-4 h-4">
+                                        </button>
+                                        <button class="bg-custom-red w-10 p-2 text-white rounded-lg text-sm hover:bg-red-700 flex gap-2 justify-center items-center">
+                                            <img th:src="@{/images/delete.png}" alt="Search Icon" class="w-4 h-4">
+                                        </button>
+
+
+                                    </div>
+                                </td>
+                            </tr>
+                      
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="flex items-center justify-between py-4">
+                    <!-- Records per page -->
+                    <div class="flex items-center gap-2">
+                      <label for="records-per-page" class="text-sm text-gray-600">Showing</label>
+                      <select id="records-per-page" class="block w-16 px-2 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option>1</option>
+                        <option>5</option>
+                        <option>10</option>
+                      </select>
+    
+                    </div>
+                  
+                    <!-- Pagination -->
+                    <div class="flex items-center gap-3">
+                      <span class="text-sm text-gray-600">Showing 1 to 1 out of 1 records</span>
+                      <div class="flex items-center gap-1">
+                        <button class="px-2 py-1 text-gray-600 bg-gray-100 rounded-md hover:bg-gray-200 disabled:opacity-50" disabled>
+                          &lt;
+                        </button>
+                        <button class="px-2 py-1 text-white bg-blue-500 rounded-md hover:bg-blue-600">1</button>
+                        <button class="px-2 py-1 text-gray-600 bg-gray-100 rounded-md hover:bg-gray-200">2</button>
+                        <button class="px-2 py-1 text-gray-600 bg-gray-100 rounded-md hover:bg-gray-200">3</button>
+                        <button class="px-2 py-1 text-gray-600 bg-gray-100 rounded-md hover:bg-gray-200">4</button>
+                        <button class="px-2 py-1 text-gray-600 bg-gray-100 rounded-md hover:bg-gray-200">
+                          &gt;
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  
+      </div>
+      
+</body>
+</html>

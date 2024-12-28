@@ -10,6 +10,8 @@ module.exports = {
         colors: {
           'custom-gray': '#D9D9D9',
           'custom-blue': '#006EC4',
+          'custom-yellow': '#FEB000',
+          'custom-red': '#E03137',
         },
         keyframes: {
           fadeInUp: {

@@ -5,7 +5,7 @@ import java.util.Optional;
 import com.project.techventory.model.User;
 
 
-import com.project.techventory.repository.Repository;
+import com.project.techventory.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,7 +20,7 @@ import lombok.AllArgsConstructor;
 public class UserService implements UserDetailsService {
 
     @Autowired
-    private Repository repository;
+    private UserRepository repository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

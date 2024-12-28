@@ -1,6 +1,6 @@
 package com.project.techventory.Security;
 
-import com.mysql.cj.protocol.AuthenticationProvider;
+
 import com.project.techventory.Service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +10,12 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.User;
+
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.stereotype.Service;
+
 
 @Configuration
 @AllArgsConstructor
@@ -53,11 +52,11 @@ public class SecurityConfig {
                     httpForm
                             .loginPage("/authentication/login").permitAll();
                     httpForm
-                            .defaultSuccessUrl("/user/dashboard");
+                            .defaultSuccessUrl("/user/view");
                 })
 
                 .authorizeHttpRequests(register->{
-                    register.requestMatchers("/authentication/admin", "/authentication/register", "/", "/css/**", "/js/**" ,"/images/**").permitAll() ;
+                    register.requestMatchers("/products/create", "/products/product" , "/admin/dashboard", "/user/view","/authentication/admin", "/authentication/register", "/", "/css/**", "/js/**" ,"/images/**").permitAll() ;
                     register.anyRequest().authenticated();
                 })
                 .logout(logout->{

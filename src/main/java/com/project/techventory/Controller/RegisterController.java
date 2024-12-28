@@ -1,7 +1,7 @@
 package com.project.techventory.Controller;
 
 import com.project.techventory.model.User;
-import com.project.techventory.repository.Repository;
+import com.project.techventory.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class RegisterController {
     @Autowired
-    private Repository myRepository;
+    private UserRepository myRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;

@@ -13,6 +13,12 @@ public class ProductService {
     private ProductRepository productRepository;
 
     public List<Product> getAllProducts() {
-        return productRepository.findAll();
+        return productRepository.findAllRandomOrder();
+    }
+    public void deleteProduct(Integer id){
+        productRepository.deleteById(id);
+    }
+    public long getProductCount(){
+        return productRepository.count();
     }
 }

@@ -56,7 +56,7 @@ public class SecurityConfig {
                 })
 
                 .authorizeHttpRequests(register->{
-                    register.requestMatchers("/products/create", "/products/product" , "/admin/dashboard", "/user/view","/authentication/admin", "/authentication/register", "/", "/css/**", "/js/**" ,"/images/**").permitAll() ;
+                    register.requestMatchers("products/delete","/products/edit/{id}" ,"/products/create", "/products/product" , "/admin/dashboard", "/user/view","/authentication/admin", "/authentication/register", "/", "/css/**", "/js/**" ,"/images/**").permitAll() ;
                     register.anyRequest().authenticated();
                 })
                 .logout(logout->{

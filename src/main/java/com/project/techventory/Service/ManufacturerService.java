@@ -28,4 +28,7 @@ public class ManufacturerService {
     public void deleteManufacturer(int id) {
         manufacturerRepository.deleteById(id);  // Ensure you pass an int type here
     }
+    public long getManufacturerCount(){
+        return manufacturerRepository.count();
+    }
 }

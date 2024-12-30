@@ -1,19 +1,26 @@
 package com.project.techventory.model;
 
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
-
+import jakarta.persistence.*;
 import org.springframework.web.multipart.MultipartFile;
 
 
 
 public class ProductEdit {
 
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
+
     @NotEmpty(message = "The name is required")
-    private String name;
+    private String productName;
 
     @Min(0)
     private double price;
@@ -28,12 +35,19 @@ public class ProductEdit {
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
-    public String getName() {
-        return name;
+    public int getId(){
+        return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setId(int id){
+        this.id = id;
+    }
+    public String getName() {
+        return productName;
+    }
+
+    public void setName(String productName) {
+        this.productName = productName;
     }
 
     public MultipartFile getImageFile() {

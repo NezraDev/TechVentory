@@ -11,21 +11,24 @@ import java.util.List;
 public class CategoryService {
 
     @Autowired
-    private CategoryRepository manufacturerRepository;
+    private CategoryRepository categoryRepository;
 
     public List<Category> getAllManufacturers() {
-        return manufacturerRepository.findAll();
+        return categoryRepository.findAll();
     }
 
     public Category getManufacturerById(int id) {
-        return manufacturerRepository.findById(id).orElse(null);
+        return categoryRepository.findById(id).orElse(null);
     }
 
     public Category saveManufacturer(Category manufacturer) {
-        return manufacturerRepository.save(manufacturer);
+        return categoryRepository.save(manufacturer);
     }
 
     public void deleteManufacturer(int id) {
-        manufacturerRepository.deleteById(id); 
+       categoryRepository.deleteById(id); 
+    }
+    public long getCategoryCount(){
+        return categoryRepository.count();
     }
 }

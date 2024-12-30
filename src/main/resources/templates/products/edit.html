@@ -12,15 +12,29 @@
 <div class="container mx-auto p-4">
     <div class="max-w-2xl mx-auto rounded border p-6 bg-white shadow-lg">
         <h2 class="text-center text-2xl font-semibold mb-6">TechVentory</h2>
-        <form th:action="@{/products/create}" id="productForm" enctype="multipart/form-data" th:object="${productEdit}" method="POST">
-            <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                <div class="sm:col-span-3">
-                  <label for="first-name" class="block text-sm/6 font-medium text-gray-900">Model</label>
-                  <div class="mt-2">
-                    <input type="text" id="name" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-custom-blue sm:text-sm/6" th:field="${productEdit.name}" required>
-                    <p th:if="${#fields.hasErrors('name')}" class="text-sm text-red-600" th:errors="${productEdit.name}"></p>
-                  </div>
+        <form th:action="@{/products/edit/{id}(id=${product.id})}" name="id" id="productForm" enctype="multipart/form-data" th:object="${productEdit}" method="POST">
+          <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            <div class="dsm:col-span-3">
+                <label for="product-id" class="block text-sm font-medium text-gray-900">Id</label>
+                <div class="mt-2">
+                    <!-- Hidden input field to carry the 'id' value -->
+                    <input type="hidden" name="id" th:value="${productEdit.id}" />
+                    <!-- Visible field to display the 'id' -->
+                    <input type="text" id="product-id" th:value="${product.id}" class="block w-16 rounded-md bg-gray-100 px-3 py-1.5 text-base text-gray-900 outline-none focus:ring-2 focus:ring-custom-blue sm:text-sm" readonly />
+                    <!-- Error message for 'id' if validation fails -->
+                    <p th:if="${#fields.hasErrors('id')}" class="text-sm text-red-600" th:errors="${productEdit.id}"></p>
                 </div>
+            </div>
+        </div>
+        
+        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+          <div class="sm:col-span-3">
+              <label for="name" class="block text-sm/6 font-medium text-gray-900">Model</label>
+              <div class="mt-2">
+                  <input type="text" id="name" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-custom-blue sm:text-sm/6" th:field="*{name}" required>
+                  <p th:if="${#fields.hasErrors('name')}" class="text-sm text-red-600" th:errors="*{name}"></p>
+              </div>
+          </div>
                 
             
             <div class="sm:col-span-3">
@@ -57,6 +71,7 @@
         <p id="price-error" class="text-sm text-red-600" style="display:none;">Please enter a price.</p>
     </div>
 </div>
+
 
 
               <div class="col-span-full">

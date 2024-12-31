@@ -1,14 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>User Dashboard</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link th:href="@{/css/main.css}" rel="stylesheet">
+    <link th:href="@{/images/logo%20solo.png}" rel="icon" type="image/x-icon">
 </head>
 <body>
-    <h1>Hello</h1>
-    <form th:action="@{/logout}" method="post">
-        <button type="submit">Logout</button>
-        </form> 
+    <div class="flex flex-col md:flex-row min-h-screen">
+        <div class="flex flex-row">
+            <div class="fixed min-h-screen flex flex-col bg-custom-blue bg-opacity-5 w-full md:w-80  gap-6 p-4">
+                
+             </div>
+             </div>
+             <div class="flex flex-col m-4 gap-4 p-2">
+                <div class="flex md:flex-col flex-grow bg-white rounded-md p-4 justify-between">
+                    <div class="flex flex-col gap-6">
+                        <div class="">
+                        <h1 class="font-semibold text-lg">All Items</h1>
+                        <p class="font-thin text-md">Items Detail Information</p>
+                    </div>
+                    <div class="flex flex-col items-center justify-center gap-6 p-4 md:flex-col">
+                        <div class="border-2 p-4 rounded-xl w-56 text-center">
+                            <h1 class="font-semibold">Product Summary</h1>
+                            <div class="p-4">
+                                <p class="text-center" th:text="${productCount}">50</p>
+                            </div>
+                        </div>
+                        <div class="border-2 p-4 rounded-xl w-56 text-center">
+                            <h1 class="font-semibold">Manufacturer Summary</h1>
+                            <div class="p-4">
+                                <p class="text-center" th:text="${manufacturerCount}">50</p>
+                            </div>
+                        </div>
+                        <div class="border-2 p-4 rounded-xl w-56 text-center">
+                            <h1 class="font-semibold">Category Summary</h1>
+                            <div class="p-4">
+                                <p class="text-center" th:text="${categoryCount}">50</p>
+                            </div>
+                        </div>
+                    </div>
+             
 </body>
+<h1>Hello</h1>
+<form th:action="@{/logout}" method="post">
+    <button type="submit">Logout</button>
+    </form> 
 </html>

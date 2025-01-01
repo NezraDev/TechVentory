@@ -12,6 +12,7 @@ import java.util.Optional;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -85,6 +86,11 @@ public class AppController {
     public String admin() {
         return "authentication/admin";
     }
+      @GetMapping("/logoutadmin")
+    public String logoutAdmin() {
+        SecurityContextHolder.clearContext();
+        return "redirect:authentication/admin";      
+    }
 
     // Admin dashboard
     @GetMapping("admin/dashboard")
@@ -94,17 +100,31 @@ public class AppController {
 
     @RequestMapping("products/product")
     @GetMapping("products/product")
-    public String product(Model model) {
+    public String product(Model model, 
+                          @RequestParam(required = false) Integer category,
+                          @RequestParam(required = false) Integer manufacturer) {
         long manufacturerCount = manufacturerService.getManufacturerCount();
         long productCount = productService.getProductCount();
         long categoryCount = categoryService.getCategoryCount();
-        List<Product> products = repo.findAllRandomOrder();
-        model.addAttribute("products", products);
+    
+        // Fetch products filtered by category and manufacturer (or all products if none are provided)
+        List<Product> filteredProducts = productService.filterProducts(category, manufacturer);
+        long filteredProductCount = filteredProducts.size();
+    
+        // Add attributes to the model for the view
+        model.addAttribute("products", filteredProducts);
+        model.addAttribute("filteredProductCount", filteredProductCount);
         model.addAttribute("manufacturerCount", manufacturerCount);
         model.addAttribute("productCount", productCount);
         model.addAttribute("categoryCount", categoryCount);
+        model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("manufacturers", manufacturerService.getAllManufacturers());
+    
+        // Return the product view
         return "products/product";
     }
+    
+  
 
     @GetMapping("products/create")
     public String showCreatePage(Model model) {

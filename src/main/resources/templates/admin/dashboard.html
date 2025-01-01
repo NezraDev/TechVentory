@@ -8,24 +8,26 @@
         <link th:href="@{/css/main.css}" rel="stylesheet">
         <link th:href="@{/images/logo%20solo.png}" rel="icon" type="image/x-icon">
     </head>
-<body class="font-poppins">
-    <div class="flex flex-row">
-        <div class="flex flex-col bg-custom-blue bg-opacity-5 w-80 h-screen rounded-2xl m-4 gap-6 p-4">
-            <div class="flex flex-row gap-4">
-                <div class="h-12 w-12 bg-custom-gray rounded-full"></div>
-                <h1 class="text-xl flex items-center justify-center font-extrabold">TechVentory</h1>
+        <body class="font-poppins min-h-screen bg-custom-gray-bg ">
+            <div class="flex flex-col md:flex-row min-h-screen -p-3">
+                <div class="flex flex-col bg-custom-blue bg-opacity-15 w-full md:w-80 gap-6 p-6">
+                    <div class="flex flex-row gap-2">
+                        <div class="">
+                            <img th:src="@{/images/logo solo.png}" class="w-10 h-10">
+                        </div>
+                        <h1 class="text-md flex items-center justify-center font-extrabold">TechVentory</h1>
+                    </div>
+                    <div class="flex flex-row p-2 gap-3">
+                        <div class="flex flex-row justify-center items-center gap-3">
+                            <img th:src="@{/images/items.png}" alt="items" class="w-8 h-8">
+                        <a href="/products/product">
+                        <p class="text-md font-extralight justify-center flex items-center">Products</p>
+                        </a>
+                        </div>
+                        
+                    </div>
+                </div>
+                </div>
             </div>
-            <div class= "flex flex-row p-2 gap-3">
-                <img th:src="@{/images/dashb.png}" alt="items" class="w-8 h-8">
-                <p class="text-xl font-extralight justify-center flex items-center">Dashboard</p>
-            </div>
-            <div class="flex flex-row p-2 gap-3">
-                <img th:src="@{/images/items.png}" alt="items" class="w-8 h-8">
-                <a href="/products/product">
-                <p class="text-xl font-extralight">Items</p>
-            </a>
-            </div>
-        </div>
-    
 </body>
 </html>

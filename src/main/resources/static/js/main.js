@@ -102,4 +102,10 @@ function previewImage(event) {
     }
     reader.readAsDataURL(file);
   }
-  
+    function toggleFilterDropdown() {
+        const dropdown = document.getElementById("filterDropdown");
+        dropdown.classList.toggle("hidden");
+    }
+    
+    
+

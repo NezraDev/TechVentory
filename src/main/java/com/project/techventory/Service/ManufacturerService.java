@@ -18,7 +18,7 @@ public class ManufacturerService {
     }
 
     public Manufacturer getManufacturerById(int id) {
-        return manufacturerRepository.findById(id).orElse(null);  // Make sure the ID is treated as an int
+        return manufacturerRepository.findById(id).orElse(null);
     }
 
     public Manufacturer saveManufacturer(Manufacturer manufacturer) {
@@ -26,9 +26,11 @@ public class ManufacturerService {
     }
 
     public void deleteManufacturer(int id) {
-        manufacturerRepository.deleteById(id);  // Ensure you pass an int type here
+        manufacturerRepository.deleteById(id);
     }
-    public long getManufacturerCount(){
+
+    public long getManufacturerCount() {
         return manufacturerRepository.count();
     }
+    
 }

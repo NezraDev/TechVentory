@@ -21,10 +21,7 @@
                 <p class="text-md font-light">Products</p>
             </div>
         </div>
-
-        <!-- Main Content -->
         <div class="rounded-lg m-2 justify-around flex flex-col border-2 border-gray-300 flex-grow p-2">
-            <!-- Header with Search and Filters -->
             <div class="flex flex-col justify-between md:flex-row items-center gap-2">
                 <form th:action="@{/user/product}" method="GET" class="flex items-center gap-2 w-96">
                     <label for="search" class="sr-only">Search Item</label>
@@ -33,13 +30,10 @@
                         <input id="search" name="productName" placeholder="Search Item" class="w-full bg-transparent outline-none text-gray-700" th:value="${param.productName}">
                     </div>
                 </form>
-                
                 <div class="flex gap-4 items-center">
                     <div class="bg-white items-center w-32 h-12 max-w-xs p-3 text-black rounded-lg text-lg flex gap-2 justify-center border-2 border-gray-300">
                         <img th:src="@{/images/filter.png}" alt="Filter Icon" class="w-8 h-8">
                         <button class="text-sm" onclick="toggleFilterDropdown()">Filters</button>
-
-                        <!-- Dropdown menu for filters -->
                         <div id="filterDropdown" class="hidden bg-white absolute mt-36 shadow-md rounded-lg w-48 py-2 text-black border border-gray-300">
                             <form th:action="@{/user/product}" method="GET" enctype="multipart/form-data" onsubmit="return true;">
 
@@ -75,8 +69,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Summary Section -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 <div class="bg-white p-4 rounded-lg border border-gray-200">
                     <h2 class="font-bold text-sm">Product Summary</h2>
@@ -103,8 +95,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Table Section -->
             <div class="hidden md:block overflow-x-auto border mt-3 border-gray-300 rounded-lg">
                 <div class="overflow-x-auto border border-gray-300 rounded-lg">
                     <div class="flex flex-col overflow-y-auto max-h-[295px]">
@@ -137,21 +127,17 @@
                                 <td th:text="${product.manufacturer}" class="p-2 text-center"></td>
                                 <td th:text="${product.category}" class="p-2 text-center"></td>
                                 <td th:text="${product.createdAt.toString().substring(0, 10)}" class="p-2 text-center"></td>
-                                <td class="p-2 text-center">
-                                 
+                                <td class="p-2 text-center"> 
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-
                 <div class="flex flex-col  items-center p-2 justify-center md:flex-row">
                     <p class="text-sm text-center text-gray-600">
                         Showing <span th:text="${filteredProductCount}"></span> out of <span th:text="${productCount}"></span> records
                     </p>
                 </div>
-
-    <!-- Mobile Version -->
     <div class="md:hidden mt-4">
         <div class="flex flex-col gap-4">
             <div th:each="product : ${products}" class="bg-white p-4 border rounded-lg">
@@ -191,7 +177,6 @@
             </div>
         </div>
     </div>
-
-    <script th:src="@{/js/main.js}"></script>
 </body>
 </html>
+<script th:src="@{/js/main.js}"></script>

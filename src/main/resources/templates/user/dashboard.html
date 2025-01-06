@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>User Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link th:href="@{/css/main.css}" rel="stylesheet">
+    <link th:href="@{/images/logo%20solo.png}" rel="icon" type="image/x-icon">
+</head>
+<body class="font-poppins min-h-screen bg-custom-gray-bg ">
+    <div class="flex flex-col md:flex-row min-h-screen -p-3">
+        <div class="flex flex-col bg-custom-blue bg-opacity-15 w-full md:w-80 gap-6 p-6">
+            <div class="flex flex-row gap-2">
+                <div class="">
+                    <img th:src="@{/images/logo solo.png}" class="w-10 h-10">
+                </div>
+                <h1 class="text-lg flex items-center justify-center font-extrabold">TechVentory</h1>
+            </div>
+            <div class="flex flex-row p-2 gap-3">
+                <div class="flex flex-row justify-center items-center gap-3">
+                    <img th:src="@{/images/items.png}" alt="items" class="w-8 h-8">
+                <a href="/user/product">
+                <p class="text-md font-extralight justify-center flex items-center">Products</p>
+                </a>
+                </div>
+                
+            </div>
+        </div>
+        </div>
+    </div>
+</body>
+</html>

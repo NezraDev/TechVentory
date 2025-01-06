@@ -23,7 +23,7 @@ public class ProductService {
     private ManufacturerRepository manufacturerRepository;
 
     public List<Product> getAllProducts() {
-        return productRepository.findAllOrderByIdDesc(); // Use descending order by ID
+        return productRepository.findAllOrderByIdDesc(); 
     }
 
     public void deleteProduct(Integer id) {
@@ -35,16 +35,14 @@ public class ProductService {
     }
 
     public List<Product> filterProducts(Integer categoryId, Integer manufacturerId) {
-        // Handle the cases where categoryId and manufacturerId are null
         if (categoryId == null && manufacturerId == null) {
             return productRepository.findAllOrderByIdDesc(); // Return all products ordered by ID descending
         }
 
-        // Fetch the Category and Manufacturer only if their IDs are provided
         Category category = (categoryId != null) ? categoryRepository.findById(categoryId).orElse(null) : null;
         Manufacturer manufacturer = (manufacturerId != null) ? manufacturerRepository.findById(manufacturerId).orElse(null) : null;
 
-        // Filter products based on available category and manufacturer
+        // Filter products based on given category and manufacturer
         if (category != null && manufacturer != null) {
             return productRepository.findByCategoryAndManufacturer(category, manufacturer);
         } else if (category != null) {
@@ -52,7 +50,13 @@ public class ProductService {
         } else if (manufacturer != null) {
             return productRepository.findByManufacturer(manufacturer);
         } else {
-            return productRepository.findAllOrderByIdDesc(); // Return all products ordered by ID descending
+            return productRepository.findAllOrderByIdDesc(); 
         }
+    }
+    public List<Product> searchProducts(String productName) {
+        if (productName == null || productName.trim().isEmpty()) {
+            return productRepository.findAll(); // Return all if no product name is provided
+        }
+        return productRepository.searchProducts(productName);
     }
 }

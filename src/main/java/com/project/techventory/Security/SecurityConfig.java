@@ -52,11 +52,11 @@ public class SecurityConfig {
                     httpForm
                             .loginPage("/authentication/login").permitAll();
                     httpForm
-                            .defaultSuccessUrl("/user/view");
+                            .defaultSuccessUrl("/user/dashboard");
                 })
 
                 .authorizeHttpRequests(register->{
-                    register.requestMatchers("products/delete","/products/edit/{id}" ,"/products/create", "/products/product" , "/admin/dashboard", "/user/view","/authentication/admin", "/authentication/register", "/", "/css/**", "/js/**" ,"/images/**").permitAll() ;
+                    register.requestMatchers("user/dashboard", "products/delete","/products/edit/{id}" ,"/products/create", "/products/product" , "/admin/dashboard", "/user/product","/authentication/admin", "/authentication/register", "/", "/css/**", "/js/**" ,"/images/**").permitAll() ;
                     register.anyRequest().authenticated();
                 })
                 .logout(logout->{

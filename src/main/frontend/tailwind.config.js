@@ -6,6 +6,8 @@ module.exports = {
       extend: {
         fontFamily: {
           poppins: ['Poppins', 'sans-serif'],
+          inter: ['Inter', 'sans-serif'],
+          
         },
         colors: {
           'custom-gray': '#D9D9D9',

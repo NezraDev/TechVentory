@@ -80,6 +80,7 @@ document.getElementById('productForm').addEventListener('submit', function(event
     })
     .catch(error => console.error('Error:', error));
 });
+
 function previewImage(event) {
     var file = event.target.files[0];
     if (!file) return;
@@ -90,19 +91,19 @@ function previewImage(event) {
       var imgElement = document.createElement('img');
       imgElement.src = e.target.result;
       imgElement.classList.add('max-w-xs', 'rounded-lg', 'border', 'border-gray-300');
-      imgElement.style.width = '100px';  // Set default width
-      imgElement.style.height = '100px'; // Set default height
-      imgElement.style.objectFit = 'cover'; // Maintain aspect ratio and cover the area
-      imgElement.style.display = 'block'; // Ensures the image is treated as a block element
-      imgElement.style.margin = '0 auto'; // Centers the image horizontally
+      imgElement.style.width = '100px';  
+      imgElement.style.height = '100px'; 
+      imgElement.style.objectFit = 'cover'; 
+      imgElement.style.display = 'block'; 
+      imgElement.style.margin = '0 auto'; 
   
-      // Replace the contents of the preview container with the new image
       previewContainer.innerHTML = '';
       previewContainer.appendChild(imgElement);
     }
     reader.readAsDataURL(file);
   }
-    function toggleFilterDropdown() {
+
+function toggleFilterDropdown() {
         const dropdown = document.getElementById("filterDropdown");
         dropdown.classList.toggle("hidden");
     }

@@ -27,11 +27,10 @@ public class UserService implements UserDetailsService {
         Optional<User> user = repository.findByUsername(username);
         if (user.isPresent()) {
             var userObj = user.get();
-            // Use the Spring Security User object which implements UserDetails
             return org.springframework.security.core.userdetails.User
                     .builder()
                     .username(userObj.getUsername())
-                    .password(userObj.getPassword())// You may want to customize the authorities here
+                    .password(userObj.getPassword())
                     .build();
         }
 

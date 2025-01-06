@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>User Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link th:href="@{/css/main.css}" rel="stylesheet">
+    <link th:href="@{/images/logo%20solo.png}" rel="icon" type="image/x-icon">
+</head>
+<body class="font-inter min-h-screen bg-custom-gray-bg">
+    <div class="flex flex-col md:flex-row min-h-screen -p-3">
+        <!-- Sidebar -->
+        <div class="flex flex-col bg-custom-blue bg-opacity-15 w-full md:w-80 gap-6 p-6">
+            <div class="flex items-center gap-2">
+                <img th:src="@{/images/logo solo.png}" class="w-10 h-10">
+                <h1 class="text-lg font-extrabold">TechVentory</h1>
+            </div>
+            <div class="flex items-center gap-3 p-2">
+                <img th:src="@{/images/items.png}" alt="items" class="w-8 h-8">
+                <p class="text-md font-light">Products</p>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="rounded-lg m-2 justify-around flex flex-col border-2 border-gray-300 flex-grow p-2">
+            <!-- Header with Search and Filters -->
+            <div class="flex flex-col justify-between md:flex-row items-center gap-2">
+                <form th:action="@{/user/product}" method="GET" class="flex items-center gap-2 w-96">
+                    <label for="search" class="sr-only">Search Item</label>
+                    <div class="flex items-center border border-gray-300 rounded-lg p-2 w-full">
+                        <img th:src="@{/images/searchplain.png}" alt="Search Icon" class="w-6 h-6">
+                        <input id="search" name="productName" placeholder="Search Item" class="w-full bg-transparent outline-none text-gray-700" th:value="${param.productName}">
+                    </div>
+                </form>
+                
+                <div class="flex gap-4 items-center">
+                    <div class="bg-white items-center w-32 h-12 max-w-xs p-3 text-black rounded-lg text-lg flex gap-2 justify-center border-2 border-gray-300">
+                        <img th:src="@{/images/filter.png}" alt="Filter Icon" class="w-8 h-8">
+                        <button class="text-sm" onclick="toggleFilterDropdown()">Filters</button>
+
+                        <!-- Dropdown menu for filters -->
+                        <div id="filterDropdown" class="hidden bg-white absolute mt-36 shadow-md rounded-lg w-48 py-2 text-black border border-gray-300">
+                            <form th:action="@{/user/product}" method="GET" enctype="multipart/form-data" onsubmit="return true;">
+
+                                <div class="px-4 py-2">
+                                    <label for="category" class="text-sm">Category:</label>
+                                    <select id="category" name="category" class="w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:outline-custom-blue sm:text-sm/6">
+                                        <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+                                    </select>
+                                </div>
+
+                                <div class="px-4 py-2">
+                                    <label for="manufacturer" class="text-sm">Manufacturer:</label>
+                                    <select id="manufacturer" name="manufacturer" class="w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:outline-blue-700 sm:text-sm/6">
+                                        <option th:each="manufacturer : ${manufacturers}" th:value="${manufacturer.id}" th:text="${manufacturer.name}"></option>
+                                    </select>
+                                </div>
+
+                                <div class="px-4 py-2 flex justify-end">
+                                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm">Apply</button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                    <div class="flex p-2 gap-2 justify-center items-center rounded-md w-16 md:w-auto">
+                        <img th:src="@{/images/adminprof.png}" alt="Admin Profile" class="w-8 h-8 rounded-full">
+                        <div class="flex flex-row justify-center items-center gap-4">
+                            <h1 class="text-sm font-bold" th:text="${username}"></h1>
+                            <form th:action="@{/authentication/login}" method="get">
+                                <button type="submit" class="text-sm w-16 bg-white border-2 border-gray-300 rounded-md p-1 hover:bg-gray-300">Logout</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary Section -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <div class="bg-white p-4 rounded-lg border border-gray-200">
+                    <h2 class="font-bold text-sm">Product Summary</h2>
+                    <div class="flex flex-col items-center gap-2 p-2">
+                        <img th:src="@{/images/Products.png}" alt="Products" class="w-8 h-8">
+                        <p class="font-semibold text-gray-500" th:text="${productCount}"></p>
+                        <p class="text-xs">Number of Products</p>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-lg border border-gray-200">
+                    <h2 class="font-bold text-sm">Manufacturer Summary</h2>
+                    <div class="flex flex-col items-center gap-2 p-2">
+                        <img th:src="@{/images/Manufacturer.png}" alt="Manufacturer" class="w-8 h-8">
+                        <p class="font-semibold text-gray-500" th:text="${manufacturerCount}"></p>
+                        <p class="text-xs">Number of Manufacturers</p>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-lg border border-gray-200">
+                    <h2 class="font-bold text-sm">Category Summary</h2>
+                    <div class="flex flex-col items-center gap-2 p-2">
+                        <img th:src="@{/images/Category.png}" alt="Category" class="w-8 h-8">
+                        <p class="font-semibold text-gray-500" th:text="${categoryCount}"></p>
+                        <p class="text-xs">Number of Categories</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table Section -->
+            <div class="hidden md:block overflow-x-auto border mt-3 border-gray-300 rounded-lg">
+                <div class="overflow-x-auto border border-gray-300 rounded-lg">
+                    <div class="flex flex-col overflow-y-auto max-h-[295px]">
+                    <table class="w-full">
+                        <thead class="bg-gray-300">
+                            <tr class="text-sm">
+                                <th class="p-2">ID</th>
+                                <th class="p-2">Name</th>
+                                <th class="p-2">Image</th>
+                                <th class="p-2">Price</th>
+                                <th class="p-2">Manufacturer</th>
+                                <th class="p-2">Category</th>
+                                <th class="p-2">Created At</th>
+                                <th class="p-2"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:if="${products.empty}" class="border-b text-xs">
+                                <td colspan="8" class="p-4 text-center text-gray-500">
+                                    No products found.
+                                </td>
+                            </tr>
+                            <tr th:each="product : ${products}" class="border-b text-xs">
+                                <td th:text="${product.id}" class="p-2 text-center"></td>
+                                <td th:text="${product.productName}" class="p-2 text-center"></td>
+                                <td class="p-2 text-center">
+                                    <img th:src="@{'/images/' + ${product.productImage}}" alt="Product Image" class="w-16 h-16">
+                                </td>
+                                <td th:text="${product.price}" class="p-2 text-center"></td>
+                                <td th:text="${product.manufacturer}" class="p-2 text-center"></td>
+                                <td th:text="${product.category}" class="p-2 text-center"></td>
+                                <td th:text="${product.createdAt.toString().substring(0, 10)}" class="p-2 text-center"></td>
+                                <td class="p-2 text-center">
+                                 
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="flex flex-col  items-center p-2 justify-center md:flex-row">
+                    <p class="text-sm text-center text-gray-600">
+                        Showing <span th:text="${filteredProductCount}"></span> out of <span th:text="${productCount}"></span> records
+                    </p>
+                </div>
+
+    <!-- Mobile Version -->
+    <div class="md:hidden mt-4">
+        <div class="flex flex-col gap-4">
+            <div th:each="product : ${products}" class="bg-white p-4 border rounded-lg">
+                <div class="flex justify-between">
+                    <span class="font-semibold">ID:</span><span th:text="${product.id}"></span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="font-semibold">Name:</span><span th:text="${product.productName}"></span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="font-semibold">Image:</span>
+                    <img th:src="@{'/images/' + ${product.productImage}}" alt="Product Image" class="w-16 h-16">
+                </div>
+                <div class="flex justify-between">
+                    <span class="font-semibold">Price:</span><span th:text="${product.price}"></span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="font-semibold">Manufacturer:</span><span th:text="${product.manufacturer}"></span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="font-semibold">Category:</span><span th:text="${product.category}"></span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="font-semibold">Created At:</span><span th:text="${product.createdAt.toString().substring(0, 10)}"></span>
+                </div>
+                <div class="flex justify-center gap-2 mt-4">
+                    <button class="bg-yellow-500 p-2 rounded-md">
+                        <img th:src="@{/images/edit.png}" alt="Edit" class="w-4 h-4">
+                    </button>
+                    <button class="bg-blue-500 p-2 rounded-md">
+                        <img th:src="@{/images/view.png}" alt="View" class="w-4 h-4">
+                    </button>
+                    <button class="bg-red-500 p-2 rounded-md">
+                        <img th:src="@{/images/delete.png}" alt="Delete" class="w-4 h-4">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script th:src="@{/js/main.js}"></script>
+</body>
+</html>

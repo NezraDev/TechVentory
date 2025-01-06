@@ -8,8 +8,7 @@ import java.nio.file.StandardCopyOption;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-
-
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -75,10 +74,10 @@ public class AppController {
         return "authentication/register";
     }
 
-    // User's view page
-    @GetMapping("user/view")
+    // User's Dashboard
+    @GetMapping("user/dashboard")
     public String view() {
-        return "user/view";
+        return "user/dashboard";
     }
 
     // Admin login page
@@ -86,46 +85,84 @@ public class AppController {
     public String admin() {
         return "authentication/admin";
     }
-      @GetMapping("/logoutadmin")
-    public String logoutAdmin() {
-        SecurityContextHolder.clearContext();
-        return "redirect:authentication/admin";      
-    }
 
+    // User's Dashboard for Products
+    @GetMapping("user/product")
+    public String product(Model model, 
+        @RequestParam(required = false) Integer category,
+        @RequestParam(required = false) Integer manufacturer,
+        @RequestParam(required = false) String productName)
+        {
+    long manufacturerCount = manufacturerService.getManufacturerCount();
+    long productCount = productService.getProductCount();
+    long categoryCount = categoryService.getCategoryCount();
+    String username = SecurityContextHolder.getContext().getAuthentication().getName();
+    List<Product> filteredProducts = productService.filterProducts(category, manufacturer);
+    long filteredProductCount = filteredProducts.size();
+
+    // Search Item Function
+    if (productName != null && !productName.trim().isEmpty()) {
+        filteredProducts = filteredProducts.stream()
+                                           .filter(p -> p.getProductName().toLowerCase().contains(productName.toLowerCase()))
+                                           .collect(Collectors.toList());
+    }
+    model.addAttribute("products", filteredProducts); // Filtered products
+    model.addAttribute("filteredProductCount", filteredProductCount); // Count of filtered products
+    model.addAttribute("manufacturerCount", manufacturerCount); // Count of manufacturers
+    model.addAttribute("productCount", productCount);           // Total product count
+    model.addAttribute("categoryCount", categoryCount);         // Total category count
+    model.addAttribute("categories", categoryService.getAllCategories()); // All categories
+    model.addAttribute("manufacturers", manufacturerService.getAllManufacturers()); // All manufacturers
+    model.addAttribute("username", username); // All users
+
+    return "user/product";  // Return the product view for user dashboard
+}
+    
     // Admin dashboard
     @GetMapping("admin/dashboard")
     public String dashboard() {
         return "admin/dashboard";
     }
 
-    @RequestMapping("products/product")
-    @GetMapping("products/product")
+    // Admin Dashboard for Products
+    @Controller
+    @RequestMapping("products")
+    public class ProductController {
+    
+    @GetMapping("/product")
     public String product(Model model, 
-                          @RequestParam(required = false) Integer category,
-                          @RequestParam(required = false) Integer manufacturer) {
-        long manufacturerCount = manufacturerService.getManufacturerCount();
-        long productCount = productService.getProductCount();
-        long categoryCount = categoryService.getCategoryCount();
+        @RequestParam(required = false) Integer category,
+        @RequestParam(required = false) Integer manufacturer,
+        @RequestParam(required = false) String productName)
+        {
+    long manufacturerCount = manufacturerService.getManufacturerCount();
+    long productCount = productService.getProductCount();
+    long categoryCount = categoryService.getCategoryCount();
+    List<Product> filteredProducts = productService.filterProducts(category, manufacturer);
     
-        // Fetch products filtered by category and manufacturer (or all products if none are provided)
-        List<Product> filteredProducts = productService.filterProducts(category, manufacturer);
-        long filteredProductCount = filteredProducts.size();
-    
-        // Add attributes to the model for the view
-        model.addAttribute("products", filteredProducts);
-        model.addAttribute("filteredProductCount", filteredProductCount);
-        model.addAttribute("manufacturerCount", manufacturerCount);
-        model.addAttribute("productCount", productCount);
-        model.addAttribute("categoryCount", categoryCount);
-        model.addAttribute("categories", categoryService.getAllCategories());
-        model.addAttribute("manufacturers", manufacturerService.getAllManufacturers());
-    
-        // Return the product view
-        return "products/product";
+     // Search Item Function
+    if (productName != null && !productName.trim().isEmpty()) {
+        filteredProducts = filteredProducts.stream()
+                                           .filter(p -> p.getProductName().toLowerCase().contains(productName.toLowerCase()))
+                                           .collect(Collectors.toList());
     }
-    
-  
+    long filteredProductCount = filteredProducts.size();
 
+ 
+    model.addAttribute("products", filteredProducts); // Filtered products
+    model.addAttribute("filteredProductCount", filteredProductCount); // Count of filtered products
+    model.addAttribute("manufacturerCount", manufacturerCount); // Count of manufacturers
+    model.addAttribute("productCount", productCount);           // Total product count
+    model.addAttribute("categoryCount", categoryCount);         // Total category count
+    model.addAttribute("categories", categoryService.getAllCategories()); // All categories
+    model.addAttribute("manufacturers", manufacturerService.getAllManufacturers()); // All manufacturers
+
+    
+    return "products/product"; // Return the product view for admin dashboard
+    } 
+
+}
+    // Create Product
     @GetMapping("products/create")
     public String showCreatePage(Model model) {
         ProductEdit productEdit = new ProductEdit();
@@ -172,9 +209,10 @@ public class AppController {
         product.setProductImage(storageFileName);
 
         repo.save(product);
-        return "redirect:/products/product";
+        return "redirect:/products/product"; // Return the created / added product
     }
 
+    // Edit Product
     @GetMapping("products/edit/{id}")
     public String showEditPage(Model model, @PathVariable int id) {
         Optional<Product> optionalProduct = repo.findById(id);
@@ -201,18 +239,17 @@ public class AppController {
         model.addAttribute("categories", categoryRepo.findAll());
         model.addAttribute("manufacturers", manufacturerRepo.findAll());
     
-        return "products/edit";
+        return "products/edit"; // Return edited product
     }
     
-
     @PostMapping("products/edit/{id}")
-public String updateProduct(
+    public String updateProduct(
         @Valid @ModelAttribute ProductEdit productEdit,
         BindingResult bindingResult,
-        @PathVariable int id,  // Use @PathVariable instead of @RequestParam
+        @PathVariable int id,  
         Model model) {
     if (bindingResult.hasErrors()) {
-        return "products/edit";  // Return to edit page if there are errors
+        return "products/edit";  
     }
 
     try {
@@ -250,14 +287,13 @@ public String updateProduct(
 
         // Save the updated product
         repo.save(product);
-    } catch (Exception ex) {
-        System.out.println("Exception during product update: " + ex.getMessage());
+        } catch (Exception ex) {
+            System.out.println("Exception during product update: " + ex.getMessage());
     }
-
-    return "redirect:/products/product";  // Redirect to the product list after update
+    return "redirect:/products/product";  // Redirect to the product list of admin after update
 }
 
-
+    // Delete Product
     @GetMapping("products/delete")
     public String deleteProduct(@RequestParam int id) {
         try {
@@ -274,4 +310,12 @@ public String updateProduct(
         }
         return "redirect:/products/product";
     }
+    // Logout User
+    @GetMapping("/logout")
+    public String logout() {
+        SecurityContextHolder.clearContext();
+        return "redirect:/login";      
+    }
 }
+
+

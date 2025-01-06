@@ -24,21 +24,21 @@ public class CategoryService {
     }
 
     public Category getCategoryById(int id) {
-        return categoryRepository.findById(id).orElse(null); // Renamed from getManufacturerById
+        return categoryRepository.findById(id).orElse(null); 
     }
 
     public Category saveCategory(Category category) {
-        return categoryRepository.save(category); // Renamed from saveManufacturer
+        return categoryRepository.save(category); 
     }
 
     public void deleteCategory(int id) {
-        categoryRepository.deleteById(id);  // Renamed from deleteManufacturer
+        categoryRepository.deleteById(id);  
     }
 
     public long getCategoryCount() {
         return categoryRepository.count();
     }
      public List<Product> getAllProducts() {
-        return productRepository.findAllOrderByIdDesc(); // Use descending order by ID
+        return productRepository.findAllOrderByIdDesc(); 
     }
 }
